@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+    "real_data: usa o dataset real em data\\raw (pulado se o arquivo nao existir)",
+]
