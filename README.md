@@ -2,8 +2,8 @@
 
 Projeto de aprendizado para portfolio: explorar dados tabulares, construir
 modelos de Machine Learning e comparar com uma rede neural de Deep Learning.
-Esta primeira etapa apenas carrega e apresenta os dados; nenhum modelo foi
-treinado ainda.
+Ate agora o projeto carrega e apresenta os dados e separa treino e teste;
+nenhum modelo foi treinado ainda.
 
 ## Problema
 
@@ -28,9 +28,22 @@ Requer Python 3.13. Na pasta do projeto:
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe src\explore_data.py
+.\.venv\Scripts\python.exe src\split_data.py
 ```
 
 O primeiro uso baixa o arquivo publico da UCI para `data\raw`.
+`split_data.py` separa 80% para treino e 20% para teste, com estratificacao
+pelo alvo e semente fixa (`42`), e salva `train.csv` e `test.csv` em
+`data\processed`.
+
+Para rodar os testes automatizados:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -v
+```
+
+Os testes com dados sinteticos rodam sempre. Os marcados com `real_data`
+usam o dataset baixado e sao pulados se ele ainda nao existir.
 Os proximos usos reutilizam o arquivo local. Os dados e o ambiente virtual
 nao devem ser enviados ao GitHub.
 

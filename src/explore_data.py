@@ -31,11 +31,17 @@ def load_data() -> pd.DataFrame:
 
     # A primeira linha da planilha agrupa colunas; a segunda tem os nomes.
     data = pd.read_excel(DATA_FILE, header=1)
+    validate_data(data)
+    return data
+
+
+def validate_data(data: pd.DataFrame) -> None:
     if TARGET not in data.columns or "ID" not in data.columns:
         raise ValueError("A planilha nao tem as colunas esperadas.")
     if data[TARGET].isna().any() or not data[TARGET].isin([0, 1]).all():
         raise ValueError("O alvo deve conter apenas 0 ou 1, sem valores ausentes.")
-    return data
+    if data["ID"].duplicated().any():
+        raise ValueError("Cada cliente deve aparecer uma unica vez (ID repetido).")
 
 
 def main() -> None:
